@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { variants } from "./Home";
 
 const Settings = () => {
   return (
