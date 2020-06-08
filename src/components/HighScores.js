@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFirebase } from "./Firebase/FirebaseContext";
 import Loader from "./Loader/Loader";
+import { Link } from "react-router-dom";
 
 const HighScores = () => {
   const firebase = useFirebase();
@@ -8,7 +9,7 @@ const HighScores = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    firebase.scores().once("value", snapshot => {
+    firebase.scores().once("value", (snapshot) => {
       const data = snapshot.val();
       const sortedScores = formatScoreData(data);
       setScores(sortedScores);
@@ -16,7 +17,7 @@ const HighScores = () => {
     });
   }, [firebase]);
 
-  const formatScoreData = firebaseScores => {
+  const formatScoreData = (firebaseScores) => {
     const scores = [];
 
     for (let key in firebaseScores) {
@@ -37,13 +38,16 @@ const HighScores = () => {
     <>
       <h1>Hi Scores</h1>
       <div id="highScoresList">
-        {scores.map(score => (
+        {scores.map((score) => (
           <div className="high-score" key={score.score}>
             <h4 className="username"> {score.username}</h4>
             <h4 className="score"> {score.score}</h4>
           </div>
         ))}
       </div>
+      <Link className="btn" to="/">
+        Return Home
+      </Link>
     </>
   );
 };

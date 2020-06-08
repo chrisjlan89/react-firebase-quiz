@@ -12,17 +12,17 @@ const Game = ({ history: { push } }) => {
     currentQuestion: "",
     score: 0,
     questionNumber: 0,
-    done: false
+    done: false,
   });
 
-  const { data, loading } = GetQuestions(3);
+  const { data, loading } = GetQuestions(10);
 
   const changeQuestion = (data, bonus = 0) => {
     if (state.questions.length === 0 && !data) {
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         score: prevState.score + bonus,
-        done: true
+        done: true,
       }));
       return;
     }
@@ -39,12 +39,12 @@ const Game = ({ history: { push } }) => {
     remainingQuestions.splice(randomQuesitonIndex, 1);
     // update state to reflects
 
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       questions: remainingQuestions,
       currentQuestion,
       score: prevState.score + bonus,
-      questionNumber: prevState.questionNumber + 1
+      questionNumber: prevState.questionNumber + 1,
     }));
   };
 
